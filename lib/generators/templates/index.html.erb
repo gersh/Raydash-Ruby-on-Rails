@@ -1,0 +1,5 @@
+Connect users to each other:
+
+<% @tokens.each do |t| %>
+<%= t %> <%= select_tag @tokens %> <% remote_function_call 'connect' %><br/>
+<% end %>
