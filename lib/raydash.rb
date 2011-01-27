@@ -9,15 +9,21 @@ module Raydash
   def self.doRequest(request)
     Net::HTTP.get(RAYDASH_HTTP_SERVER, request, RAYDASH_HTTP_PORT)
   end
+  # Gets a new token for internal or external streams. The same token can be re-used for input and output streams.
   def self.getToken(streamName="")
     result = self.doRequest("/api/1/authtoken/" + streamName + "?userid=" + self.userid + "&secret=" & self.secret)
     throw "Unable to create token" if result!=200
     return result.body
   end
+  # Changes which input-stream connects to which output-stream token
   def self.changeStream(output_token,input_token)
-    result = def.doRequest("/api/1/changeSteam/" + output_token + "/" + input_token "&userid=" + self.userId + "&secret=" & self.secret)
+    result = doRequest("/api/1/changeSteam/" + output_token + "/" + input_token + "&userid=" + self.userId + "&secret=" & self.secret)
     throw "Unable to create token" if result!=200
     return result.body
   end
-  # Your code goes here...
+
+  # Used for configuration
+  def self.setup
+    yield self
+  end
 end

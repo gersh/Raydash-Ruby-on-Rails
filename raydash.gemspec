@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "raydash"
   s.version     = Raydash::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Gershon Bialer"]
+  s.email       = ["gershon@raydash.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Embed video chat or video streaming via Raydash}
+  s.description = %q{Live video chat or video streams can be hosted on Raydash, and accessed via the API contained within this gem}
 
   s.rubyforge_project = "raydash"
 
