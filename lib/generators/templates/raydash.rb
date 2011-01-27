@@ -1,4 +1,4 @@
 Raydash.setup do |config|
-  config.userid = "<%= options[:userid]%>"
-  config.secret = "<%= options[:secret]%>"
+  config.userid = "<%= @userid%>"
+  config.secret = "<%= @secret%>"
 end
