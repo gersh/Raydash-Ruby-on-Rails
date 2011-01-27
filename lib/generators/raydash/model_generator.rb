@@ -1,8 +1,9 @@
 module Raydash
   module Generators
     class ModelGenerator < Rails::Generator::NamedBase
+      desc "Create a table to store raydash stuff. Syntax: 'rails g raydash:model [model_name/optional]'"
       include Rails::Generators::Migration
-      class_option :class_name
+      argument :name, :desc => "Name of the model
       # Implement the required interface for Rails::Generators::Migration.
       # taken from http://github.com/rails/rails/blob/master/activerecord/lib/generators/active_record.rb
       def self.next_migration_number(dirname)
@@ -14,7 +15,7 @@ module Raydash
       end
 
       def create_migration_file
-	@name=option[:class_name]
+	 @class_name
         migration_template 'migration.rb', 'db/migrate/create_raydash_table.rb'
       end
     end

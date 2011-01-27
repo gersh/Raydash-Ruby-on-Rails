@@ -1,13 +1,11 @@
 module Raydash
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      desc "this generator install necessary files and configures your application for Raydash. Syntax: 'rails g raydash:install [userid] [secret]'. The userid and secret can be obtained from http://www.raydash.com."
+      desc "This generator install necessary files and configures your application for Raydash. Syntax: 'rails g raydash:install [userid] [secret]'. The userid and secret can be obtained from http://www.raydash.com."
       source_root File.expand_path("../../templates", __FILE__)
-      class_option :userid, :desc => "Userid from http://www.raydash.com", :required => true
-      class_option :secret, :desc => "Secret from http://www.raydash.com", :required => true
+      argument :userid, :desc => "Userid from http://www.raydash.com", :required => true
+      argument :secret, :desc => "Secret from http://www.raydash.com", :required => true
       def copy_initializer
-        @userid=options[:userid]
-        @secret=options[:secret]
         template "raydash.rb", "config/initializers/raydash.rb"
       end
       def copy_flash
