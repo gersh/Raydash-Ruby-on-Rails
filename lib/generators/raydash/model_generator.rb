@@ -1,23 +1,28 @@
 module Raydash
   module Generators
     class ModelGenerator < Rails::Generator::NamedBase
-      desc "Create a table to store raydash stuff. Syntax: 'rails g raydash:model [model_name/optional]'"
-      include Rails::Generators::Migration
-      argument :name, :desc => "Name of the model
-      # Implement the required interface for Rails::Generators::Migration.
-      # taken from http://github.com/rails/rails/blob/master/activerecord/lib/generators/active_record.rb
-      def self.next_migration_number(dirname)
-        if ActiveRecord::Base.timestamped_migrations then
-          Time.now.utc.strftime("%Y%m%d%H%M%S")
-        else
-          "%.3d" % (current_migration_number(dirname) + 1)
-        end
-      end
+       def manifest
+         record do |m|
+           m.migration_template 'migration:migration.rb', "db/migrate", {:assigns => raydash_local_assigns,
+             :migration_file_name => 'create_raydash_table_#{custom_file_name}'
+           }
+         end
+       end
+       private
+       def custom_file_name
+         custom_name = class_name.underscore.downcase
+         custom_name = custom_name.pluralize if ActiveRecord::Base.pluralize_table_names
+       end
 
-      def create_migration_file
-	 @class_name
-        migration_template 'migration.rb', 'db/migrate/create_raydash_table.rb'
-      end
+       def raydash_local_assigns
+         returning(assigns = {}) do
+           assigns[:migration_action] = "add"
+           assigns[:class_name] = "add_raydash_table_#{custom_file_name}"
+           assigns[:table_name] = custom_file_name
+           assigns[:attributes] = [Rails::Generator::GeneratedAttribute.new("last_squawk", "string")]
+           assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("last_squawked_at", "datetime")
+         end
+       end
     end
   end
 end
