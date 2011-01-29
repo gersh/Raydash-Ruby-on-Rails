@@ -1,4 +1,5 @@
 require 'net/http'
+require 'app/helpers/raydash_helper'
 module Raydash
   RAYDASH_HTTP_SERVER = "api.raydash.com"
   RAYDASH_HTTP_PORT = 8080
@@ -33,3 +34,4 @@ module Raydash
     yield self
   end
 end
+ActionView::Base.send :include, RaydashHelper

@@ -1,3 +1,13 @@
-class <%= @ModelName %> < ActiveRecord::Base
+class <%= @custom_name %> < ActiveRecord::Base
+  before_create :generate_token
 
+  def point_to(otherToken)
+    Raydash.changeStream(self.connected_to,otherToken)
+    self.connected_to=otherToken
+    self.save()
+  end
+  private
+    def generate_token
+       self.token = Raydash.getToken()
+    end
 end
