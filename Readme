@@ -1,0 +1,96 @@
+== Introduction
+
+Raydash allows you to easily integrate web-based video chat into your
+web applications. You will need a userid and secret to access
+Raydash's servers. Then, embed videostream and videorecord to have
+camera and display boxes in the application. 
+
+== Quickstart
+
+1) Add the following to your Gemfile:
+
+   gem "raydash", :git => 'https://github.com/gersh/Raydash-Ruby-on-Rails'
+
+2) Configure your project your userid and secret with the following command:
+
+   rails g raydash:install [user] [token]
+
+This will generate the required configuration files to use Raydash
+
+3) You now need to generate a model, which will call the Raydash API
+to generate tokens for your video streams. Optionally, you can create
+your own model, and call the API directly, but a generator is provided
+to make this easier. You can invoke the generator by calling
+
+   rails g raydash:model [modelname]
+
+This model will represent a token. Each token can be used for both a
+record and playback stream control. 
+
+4) Create a controller for your app. For example, if you name the
+named the model 'video' you can create a new video with:
+
+      def index()
+          @video = Video.new()
+          @video.save() 
+      end           
+
+5) Add the proper header information to your layout. Often, this is
+app/views/layouts/application.html.erb. You will need add the
+following into the header:
+
+          <%= raydash_header %>
+6) Create a view to display the video. You will utilize two helpers
+provided by raydash: 'videostream' and 'videorecord'. These will embed
+a streaming ability, and a recording ability respectively. 
+
+A sample view might look like:
+  
+        <%= videostream(@video.token,"video_in") %>
+        <%= videorecord(@video.token,"video_out") %>
+
+In this sample, @video.token specifies the token we are connecting to,
+and "video_in" and "video_out" are div ids. 
+
+
+7) Assuming you have configured the necessary routes (E.X adding:
+            match '/YOUR_CONTROLLER' => 'YOUR_CONTROLLER#index'
+to routes 'routes.rb', you should be
+able to load the page, and enable your camera. The streaming
+capabilities will also be enabled but the stream isn't connect to
+anything.
+
+8) You can connect arbitrary tokens. This is handle all handle on the
+server-end, and it can be done in real-time. So, create a new
+controller function such as:
+
+          def connect_to()
+              video=Model.find(params[:id1])
+              video.connect_to(params[:id2])
+          end
+
+          with route
+          '/videos/route/:id1/:id2' => 'YOUR_CONTROLLER#connect_to'
+
+
+== Backend-API library
+
+=== Raydash.getToken(streamName="")
+This function gets a token. A token is needed for every recording or
+viewing video box in the application. 
+
+streamName is an optional parameter that is another token created with
+this function. If specified, the display stream will show the stream
+from the call of that function
+
+
+=== Raydash.changeStream(output_token, input_token)
+The function re-points where a token is streaming from. We can
+dynamically change where any stream is pointing, dynamically.
+
+output_token is the name of the token we are streaming to. If we have
+a video stream initialized with this token, if will immediately start
+displaying content from the input_token.
+
+input_token refers to a videorecord that has been initialized with its stream
+   
