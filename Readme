@@ -9,7 +9,7 @@ camera and display boxes in the application.
 
 1) Add the following to your Gemfile:
 
-   gem "raydash", :git => 'https://github.com/gersh/Raydash-Ruby-on-Rails'
+   gem "raydash", :git => 'git://github.com/gersh/Raydash-Ruby-on-Rails.git'
 
 2) Configure your project your userid and secret with the following command:
 
