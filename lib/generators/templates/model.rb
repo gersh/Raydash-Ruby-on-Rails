@@ -1,4 +1,4 @@
-class <%= @custom_name %> < ActiveRecord::Base
+class <%= @class_name %> < ActiveRecord::Base
   before_create :generate_token
 
   def point_to(otherToken)
