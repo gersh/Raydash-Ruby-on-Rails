@@ -1,1 +1,1 @@
-Raydash has been installed into your application. If you run 'rails g raydash:model' and 'rails g raydash:controller [controllername]', you can create a sample configuration for using Raydash within your rails application.
+Raydash has been installed into your application. If you run 'rails g raydash:model', you can create a model for tracking Raydash video streams in your application
