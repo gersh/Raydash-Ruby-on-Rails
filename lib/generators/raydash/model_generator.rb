@@ -9,7 +9,7 @@ module Raydash
       desc "Generate a model for working with video tokens"
       source_root File.expand_path("../../templates", __FILE__)
       def manifest
-           @custom_name=custom_file_name
+           @custom_name= custom_name
 	   @class_name = class_name.capitalize
            migration_template 'migration.rb', "db/migrate/#{custom_file_name}", {:assigns => raydash_local_assigns(),
              :migration_file_name => 'create_raydash_table_#{custom_file_name}'
@@ -27,6 +27,7 @@ module Raydash
        def custom_name
            custom_name = class_name.underscore.downcase
            custom_name = custom_name.pluralize if ActiveRecord::Base.pluralize_table_names
+	   return(custom_name)
        end
        def self.next_migration_number(dirname)
         if ActiveRecord::Base.timestamped_migrations
