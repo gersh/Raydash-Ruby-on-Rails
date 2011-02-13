@@ -1,4 +1,4 @@
-class <%= @name %> < ActiveRecord::Migration
+class <%= @class_name %> < ActiveRecord::Migration
    def self.up
      create_table :<%= @name %> do |t|
         t.string :token

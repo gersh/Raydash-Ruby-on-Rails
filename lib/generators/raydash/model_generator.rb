@@ -9,7 +9,9 @@ module Raydash
       desc "Generate a model for working with video tokens"
       source_root File.expand_path("../../templates", __FILE__)
       def manifest
-           migration_template 'migration.rb', "db/migrate/create_raydash_table_#{custom_file_name}", {:assigns => raydash_local_assigns(),
+           @custom_name=custom_file_name
+	   @class_name = class_name.capitalize
+           migration_template 'migration.rb', "db/migrate/#{custom_file_name}", {:assigns => raydash_local_assigns(),
              :migration_file_name => 'create_raydash_table_#{custom_file_name}'
            }
       end
