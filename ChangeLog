@@ -1,0 +1,2 @@
+0.1.0
+Added getStreamInfo to find out information about a stream, and added setCallBackUrl, which allows callbacks on different event
