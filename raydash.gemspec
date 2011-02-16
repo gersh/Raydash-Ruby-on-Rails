@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.description = %q{Live video chat or video streams can be hosted on Raydash, and accessed via the API contained within this gem}
 
   s.rubyforge_project = "raydash"
+  
+  s.add_dependency('json')  
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
