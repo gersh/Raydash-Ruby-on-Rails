@@ -60,18 +60,20 @@ able to load the page, and enable your camera. The streaming
 capabilities will also be enabled but the stream isn't connect to
 anything.
 
-8) You can connect arbitrary tokens. This is handle all handle on the
+8) You can connect arbitrary tokens. This all handled on the
 server-end, and it can be done in real-time. So, create a new
 controller function such as:
 
           def connect_to()
               video=Model.find(params[:id1])
-              video.point_to(params[:id2])
+	      otherVideo=Video.find(params[:id2])
+              video.point_to(otherVideo.token)
           end
 
           with route
           '/videos/route/:id1/:id2' => 'YOUR_CONTROLLER#connect_to'
 
+When connect_to is called, it will point on stream at another stream
 
 == Backend-API library
 
