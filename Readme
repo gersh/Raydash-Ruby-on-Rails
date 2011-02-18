@@ -95,4 +95,7 @@ a video stream initialized with this token, if will immediately start
 displaying content from the input_token.
 
 input_token refers to a videorecord that has been initialized with its stream
-   
+ 
+=== Raydash.getStreamInfo(token)
+Returns a hash-array with information about the token. 
+	 
