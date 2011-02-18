@@ -28,7 +28,7 @@ module Raydash
   end
   # Gets information about the stream
   def self.getStreamInfo(token)
-    path="/api/1/streamInfo/" + token + "?userid=" + self.userid + "&secret=" + self.secret 
+    path="/api/1/streamInfo/" + token + "?userid=" + self.userid + "&secret=" + self.secret
     result = doRequest(path)
     result.value()
     return JSON.parse(result.body)
