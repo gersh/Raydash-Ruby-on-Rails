@@ -73,6 +73,45 @@ controller function such as:
 
 When connect_to is called, it will point on stream at another stream
 
+== Helpers
+These can be used within any view you use the Raydash gem.
+=== raydash_header()
+Generates the html for the header to include necessary javascript files to use raydash
+=== videostream(token,id,height="640",width="480",videoOff="0")
+Adds an flash element that plays video and sound
+
+- token The token for the stream. You can generate a new token with Raydash.getToken(), or it is done automatically in models generated with "rails g raydash:model". 
+- id The div id for use within the HTML. This can be useful for interacting with the javascript API
+- height The height of the videostream
+- width The width of the videostream
+- videoOff if "1", it will hide the video, and only stream audio.
+=== videorecord(token,id,height="640",width="480",hideCamera="0")
+Adds a flash element to record and send to the server video and sound
+
+- token The token for the stream. You can generate a new with Raydash.getToken(), or it is done automatically in models generated with "rails g raydash:model".
+- id The div id for use within the HTML. This can be useful for interacting with the javascript API
+- height The height of videorecord
+- width The width of videorecord
+- hideCamera if "1", it will hide the camera. This is useful is you don't want to show the camera
+- videoOff if "1", it will only stream audio.
+
+== Javascript API
+Generally, most functionality should be performed via the backend API. However, there is a Javascript API for working with the flash elements for certain purposes. You can call these elements by using document.getElementById("id"), where id is the id you specify when you add the element to your page 
+=== Videostream
+==== play()
+If you aren't currently playing the stream, start playing. Generally, the stream auto-starts when you load the page in your web browser, so it is unneccessary to use this
+==== stop()
+Stop playing any stream. Note: It is often preferrable to use changeStream in the backend API to switch to a black stream. There is a special token, "dummyblack" on the server for this purpose 
+=== Videorecord
+==== play()
+If you aren't currently recording the stream, it starts recording. Generally, the recording auto-starts when you load the page in your web browser, so it is unneccessary to use this
+==== stop()
+Totally stops all recording.
+==== changeResolution(width,height)
+Changes the resolution and size of the video recording
+-width The new width
+-height The new height
+
 == Backend-API library
 
 === Raydash.getToken(streamName="")
@@ -86,7 +125,7 @@ from the call of that function
 
 === Raydash.changeStream(output_token, input_token)
 The function re-points where a token is streaming from. We can
-dynamically change where any stream is pointing, dynamically.
+dynamically change where any stream is pointing, dynamically. You can point to the input_token "dummyblack" to make the window totally black.
 
 output_token is the name of the token we are streaming to. If we have
 a video stream initialized with this token, if will immediately start
