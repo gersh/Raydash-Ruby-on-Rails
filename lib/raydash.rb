@@ -4,7 +4,8 @@ require 'json'
 module Raydash
   RAYDASH_HTTP_SERVER = "api.raydash.com"
   RAYDASH_HTTP_PORT = 8080
-
+  @@userid = ENV['RAYDASH_USERID']
+  @@secret = ENV['RAYDASH_SECRET']
   mattr_accessor :userid
   mattr_accessor :secret
 

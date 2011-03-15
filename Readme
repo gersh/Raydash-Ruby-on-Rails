@@ -11,7 +11,11 @@ Rails applications. You will need a userid and secret to access Raydash's server
 
 2) Configure your project your userid and secret with the following command:
 
-   rails g raydash:install [user] [token]
+   rails g raydash:install [userid] [secret]
+
+If you set the environment variables RAYDASH_USERID and RAYDASH_SECRET or use the Heroku plugin you can just call:
+
+   rails g raydash:install
 
 This will generate the required configuration files to use Raydash
 
