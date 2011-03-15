@@ -4,10 +4,11 @@ require 'json'
 module Raydash
   RAYDASH_HTTP_SERVER = "api.raydash.com"
   RAYDASH_HTTP_PORT = 8080
-  @@userid = ENV['RAYDASH_USERID']
-  @@secret = ENV['RAYDASH_SECRET']
   mattr_accessor :userid
   mattr_accessor :secret
+  self.userid = ENV['RAYDASH_USERID']
+  self.secret = ENV['RAYDASH_SECRET']
+
 
   # Gets a new token for internal or external streams. The same token can be re-used for input and output streams.
   def self.getToken(streamName="")
