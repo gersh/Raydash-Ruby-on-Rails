@@ -2,7 +2,7 @@ require 'net/http'
 require 'app/helpers/raydash_helper'
 require 'json'
 module Raydash
-  RAYDASH_HTTP_SERVER = "api.raydash.com"
+  RAYDASH_HTTP_SERVER = "50.17.211.117"
   RAYDASH_HTTP_PORT = 8080
   mattr_accessor :userid
   mattr_accessor :secret
