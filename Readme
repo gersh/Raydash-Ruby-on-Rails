@@ -1,7 +1,7 @@
 == Introduction
 
 Raydash allows you to easily integrate live video and/or audio into your
-Rails applications. You will need a userid and secret to access Raydash's servers. This can be obtained by signing up for the beta at http://www.raydash.com. Next, you will follow the instructions below. You will be using helpers to embed videostream and videorecord flash objects into your application for playing and recording real-time audio and/or video.
+Rails applications. Your server will need to be able to make outgoing connections api.raydash.com on port 8080. You will need a userid and secret to access Raydash's servers. This can be obtained by signing up for the beta at http://www.raydash.com. Next, you will follow the instructions below. You will be using helpers to embed videostream and videorecord flash objects into your application for playing and recording real-time audio and/or video.
 
 == Quickstart
 
