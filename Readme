@@ -89,7 +89,7 @@ Adds an flash element that plays video and sound
 - height The height of the videostream
 - width The width of the videostream
 - videoOff if "1", it will hide the video, and only stream audio.
-=== videorecord(token,id,height="640",width="480",hideCamera="0")
+=== videorecord(token,id,height="640",width="480",hideCamera="0",videoOff="0")
 Adds a flash element to record and send to the server video and sound
 
 - token The token for the stream. You can generate a new with Raydash.getToken(), or it is done automatically in models generated with "rails g raydash:model".
