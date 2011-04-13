@@ -8,11 +8,6 @@ module Raydash
       def copy_initializer
         template "raydash.rb", "config/initializers/raydash.rb"
       end
-      def copy_flash
-        empty_directory "public/swfs/raydash"
-        copy_file "ClientBox.swf", "public/swfs/raydash/ClientBox.swf"
-        copy_file "RecordBox.swf", "public/swfs/raydash/RecordBox.swf"
-      end
       def copy_flash_javascript
         copy_file "swfobject.js", "public/javascripts/swfobject.js"
       end
