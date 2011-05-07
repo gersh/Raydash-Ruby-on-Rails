@@ -2,7 +2,7 @@ require 'net/http'
 require 'app/helpers/raydash_helper'
 require 'json'
 module Raydash
-  RAYDASH_HTTP_SERVER = "localhost"
+  RAYDASH_HTTP_SERVER = "api.raydash.com"
   RAYDASH_HTTP_PORT = 8080
   CLIENTBOX_VERSION = "1"
   RECORDBOX_VERSION = "2"
