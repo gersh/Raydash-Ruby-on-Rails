@@ -8,9 +8,6 @@ module Raydash
       def copy_initializer
         template "raydash.rb", "config/initializers/raydash.rb"
       end
-      def copy_flash_javascript
-        copy_file "swfobject.js", "public/javascripts/swfobject.js"
-      end
       def show_readme
         readme "README" if behavior == :invoke
       end
