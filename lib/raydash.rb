@@ -91,7 +91,7 @@ module Raydash
     return JSON.parse(result.body)
   end
   def self.startRecord(token)
-    path="/api/2/startRecord//#{token}"
+    path="/api/2/startRecord/#{token}"
     result = self.getRequest(path + "?userid=#{self.userid}&secret=#{self.secret}")
     return result.body
   end
@@ -99,6 +99,10 @@ module Raydash
     path="/api/2/stopRecord/#{token}"
     result = self.getRequest(path + "?userid=#{self.userid}&secret=#{self.secret}&bucket=#{CGI::escape(bucket)}")
     return result.body
+  end
+  def self.setUserInfo(amazonKey,amazonSecret,callbackUrl)
+    path="/api/2/user/#{self.userid}"
+    postRequest(path,{'userid'=>self.userid,'secret'=>self.secret,'amazonSecret'=>amazonSecret,'amazonKey'=>amazonKey})
   end
   # Used for configuration
   def self.setup
