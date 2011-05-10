@@ -111,10 +111,17 @@ module Raydash
 
   private
   def self.getRequest(request)
-    return Net::HTTP.get_response(RAYDASH_HTTP_SERVER, request, RAYDASH_HTTP_PORT)
+    http=Net::HTTP.new(RAYDASH_HTTP_SERVER,RAYDASH_HTTP_PORT)
+    http.read_timeout=20
+    http.open_timeout=20
+    return http.request_get(request)
   end
   def self.postRequest(path,request)
-    return Net::HTTP.post_form(URI.parse("http://" + RAYDASH_HTTP_SERVER + ":" + RAYDASH_HTTP_PORT.to_s() + path), request)
+    http=Net::HTTP.new(RAYDASH_HTTP_SERVER,RAYDASH_HTTP_PORT)
+    http.read_timeout=20
+    http.open_timeout=20
+
+    return http.request_post(path, request.to_query)
   end
 
 
