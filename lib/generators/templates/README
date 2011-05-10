@@ -1,1 +1,3 @@
-Raydash has been installed into your application. If you run 'rails g raydash:model', you can create a model for tracking Raydash video streams in your application
+Raydash has been installed into your application. Add <%= raydash_header %> to header of your template.
+In your controller, put @token=Raydash.getToken()
+In your views, you can use <%=videorecord @token, "record" %> for recording and <%=videostream @token, "stream" %> for streaming. 
