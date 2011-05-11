@@ -19,23 +19,17 @@ If you set the environment variables RAYDASH_USERID and RAYDASH_SECRET or use th
 
 This will generate the required configuration files to use Raydash
 
-3) You now need to generate a model, which will call the Raydash API
-to generate tokens for your video streams. Optionally, you can create
-your own model, and call the API directly, but a generator is provided
-to make this easier. You can invoke the generator by calling
 
-   rails g raydash:model [modelname]
-
-This model will represent a token. Each token can be used for both a
-record and playback stream control. 
-
-4) Create a controller for your app. For example, if you name the
-named the model 'video' you can create a new video with:
+4) Create a controller for your app. For example,
 
       def index()
-          @video = Video.new()
-          @video.save() 
+          @token = Raydash.getToken()
       end           
+
+You may also set a customGroup for your token to track it. This can be done with:
+    Raydash.getToken("dummyblack","YOUR_CUSTOM_GROUP")
+
+dummyblack is the default for pointing the token. You can also point the token to view existing token's stream.
 
 5) Add the proper header information to your layout. Often, this is
 app/views/layouts/application.html.erb. You will need add the
@@ -48,10 +42,10 @@ a streaming ability, and a recording ability respectively.
 
 A sample view might look like:
   
-        <%= videostream(@video.token,"video_in") %>
-        <%= videorecord(@video.token,"video_out") %>
+        <%= videostream(@token,"video_in") %>
+        <%= videorecord(@token,"video_out") %>
 
-In this sample, @video.token specifies the token we are connecting to,
+In this sample, @token specifies the token we are connecting to,
 and "video_in" and "video_out" are div ids. 
 
 
@@ -62,20 +56,25 @@ able to load the page, and enable your camera. The streaming
 capabilities will also be enabled but the stream isn't connect to
 anything.
 
-8) You can connect arbitrary tokens. This all handled on the
-server-end, and it can be done in real-time. So, create a new
-controller function such as:
+8) You can create new tokens, which point to existing tokens with:
 
-          def connect_to()
-              video=Model.find(params[:id1])
-	      otherVideo=Video.find(params[:id2])
-              video.point_to(otherVideo.token)
+Raydash.getToken(oldTokenName)
+
+You can directly connect your token to a given token with:
+          def connect_token()
+		Raydash.getToken(params[:old_token])
           end
 
           with route
           '/videos/route/:id1/:id2' => 'YOUR_CONTROLLER#connect_to'
 
-When connect_to is called, it will point on stream at another stream
+When connect_to is called, it will point on stream at another stream. This can be accomplished with:
+	
+	raydash.changeStream(myToken,otherToken)
+
+Note, this will only point it one way. If you want to point it the other way, you will also need to call:
+
+	raydash.changeStream(otherToken,myToken)
 
 == Helpers
 These can be used within any view you use the Raydash gem.
@@ -118,7 +117,7 @@ Changes the resolution and size of the video recording
 
 == Backend-API library
 
-=== Raydash.getToken(streamName="")
+=== Raydash.getToken(streamName="",customGroup="")
 This function gets a token. A token is needed for every recording or
 viewing video box in the application. 
 
@@ -126,7 +125,7 @@ streamName is an optional parameter that is another token created with
 this function. If specified, the display stream will show the stream
 from the call of that function
 
-
+customGroup This is an optional parameter for tracking different tokens
 === Raydash.changeStream(output_token, input_token)
 The function re-points where a token is streaming from. We can
 dynamically change where any stream is pointing, dynamically. You can point to the input_token "dummyblack" to make the window totally black.
@@ -139,4 +138,20 @@ input_token refers to a videorecord that has been initialized with its stream
  
 === Raydash.getStreamInfo(token)
 Returns a hash-array with information about the token. 
-	 
+	
+=== Raydash.startRecord(token)
+Starts recording for a given token
+
+=== Raydash.stopRecord(token,bucket)
+
+token To stop recording for
+
+bucket Amazon S3 bucket to put it into. Note, you must first call Raydash.setUserInfo to set the your amazon key and secret
+
+=== Raydash.setUserInfo(amazonKey,amazonSecret,callbackUrl="")
+
+amazonKey Key for saving onto amazon s3. This key must have permissions to save to S3 buckets
+
+amazonSecret The secret for the key
+
+callbackUrl A calbackUrl for sending notifications on changes in streams 
