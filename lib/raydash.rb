@@ -100,7 +100,7 @@ module Raydash
     result = self.getRequest(path + "?userid=#{self.userid}&secret=#{self.secret}&bucket=#{CGI::escape(bucket)}")
     return result.body
   end
-  def self.setUserInfo(amazonKey,amazonSecret,callbackUrl)
+  def self.setUserInfo(amazonKey,amazonSecret,callbackUrl="")
     path="/api/2/user/#{self.userid}"
     postRequest(path,{'userid'=>self.userid,'secret'=>self.secret,'amazonSecret'=>amazonSecret,'amazonKey'=>amazonKey})
   end
