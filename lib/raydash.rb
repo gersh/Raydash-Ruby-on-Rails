@@ -79,7 +79,7 @@ module Raydash
 
   # Gets information about the stream
   def self.getStreamInfo(token)
-    path="/api/2/authtoken/#{token}" + token + "?userid=" + self.userid + "&secret=" + self.secret
+    path="/api/2/authtoken/" + token + "?userid=" + self.userid + "&secret=" + self.secret
     result = getRequest(path)
     return JSON.parse(result.body)
   end
