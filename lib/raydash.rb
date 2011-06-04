@@ -62,7 +62,7 @@ module Raydash
 
     path="/api/2/authtoken/#{output_token}/randnext?userid=#{userid}&secret=#{secret}"
     if customGroup!=nil then
-      path += "&browserSession=#{browserSession}"
+      path += "&customGroup=#{customGroup}"
     end
     if active!=nil then
       path += "&active=#{active}"
