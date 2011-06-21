@@ -135,7 +135,18 @@ a video stream initialized with this token, if will immediately start
 displaying content from the input_token.
 
 input_token refers to a videorecord that has been initialized with its stream
- 
+
+== Raydash.changeStreamRand(token, params)
+This changes to a random other stream satisfying the given criteria
+The token is the token of the stream you want to point. Params can be:
+	:active => true will connect to streams that are active
+	:twoWay => true will make a two-way connection
+	:customGroup The custom group we to connect with
+== Raydash.changeStreamNext(token,params)
+	:active => true will connect to streams that are active
+	:twoWay => true will make a two-way connection
+	:customGroup The custom group we to connect with
+
 === Raydash.getStreamInfo(token)
 Returns a hash-array with information about the token. 
 	

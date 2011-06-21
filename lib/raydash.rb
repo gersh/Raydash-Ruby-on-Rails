@@ -24,6 +24,21 @@ module Raydash
     end
     return result.body
   end
+  def self.getTokensInfo(params)
+    active=params[:active]
+    customGroup=params[:customGroup]
+
+    path="/api/2/authtoken?userid=#{userid}&secret=#{secret}"
+
+    if active!=nil then
+      path += "&active=#{active}"
+    end
+    if customGroup!=nil then
+      path += "&customGroup=#{customGroup}"
+    end
+    result = getRequest(path)
+    return(JSON.parse(result.body))
+  end
   # Changes which input-stream connects to which output-stream token
   def self.changeStream(output_token,input_token)
     result = postRequest("/api/2/authtoken/#{output_token}",{'streamName'=>input_token, 'userid' => self.userid, 'secret' => self.secret, })
