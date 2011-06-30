@@ -9,12 +9,12 @@ module RaydashHelper
     javascript_tag("swfobject.embedSWF(\"" + Raydash.getAssetUrl() + "/api/2/clientbox/1\", \"#{id}\",#{width},#{height},\"9.0.0\",\"http://www.adobe.com/products/flashplayer/download\",{autostart:1,token:\"#{token}\",videoOff:\"#{videoOff}\"},{allowscriptaccess:'always'},{});")  +  content_tag(:div, "Video stream not available", :id => id)
   end
   # This element sends video/audio to the server
-  def videorecord(token, id,width="640",height="480",hideCamera="0",videoOff="0")
-    javascript_tag("function setSize(width,height,id) {if(id==undefined){id=\"#{id}\";  }document.getElementById(id).width=width;document.getElementById(id).height=height;}\n"   + "\nvar server_version=2;\nvar version=swfobject.getFlashPlayerVersion();if(version.major<10 || version.minor<3) {server_version=1;}"  + "else {server_version=2;}\nswfobject.embedSWF(\"" + Raydash.getAssetUrl() +  "/api/2/recordbox/\" + server_version , \"#{id}\",#{width},#{height},\"9.0.0\",\"http://www.adobe.com/products/flashplayer/download\",{hideControls:1,hideCamera:\"#{hideCamera}\",autostart:1,token:\"#{token}\",videoOff:\"#{videoOff}\"},{allowscriptaccess:'always'},{});" ) +  content_tag(:div, "Video stream not available", :id => id)
+  def videorecord(token, id,width="640",height="480",hideCamera="0",videoOff="0",microphoneOff="0")
+    javascript_tag("function setSize(width,height,id) {if(id==undefined){id=\"#{id}\";  }document.getElementById(id).width=width;document.getElementById(id).height=height;}\n"   + "\nvar server_version=2;\nvar version=swfobject.getFlashPlayerVersion();if(version.major<10 || version.minor<3) {server_version=1;}"  + "else {server_version=2;}\nswfobject.embedSWF(\"" + Raydash.getAssetUrl() +  "/api/2/recordbox/\" + server_version , \"#{id}\",#{width},#{height},\"9.0.0\",\"http://www.adobe.com/products/flashplayer/download\",{hideControls:1,hideCamera:\"#{hideCamera}\",autostart:1,token:\"#{token}\",videoOff:\"#{videoOff}\",microphoneOff:\"#{microphoneOff}\"},{allowscriptaccess:'always'},{});" ) +  content_tag(:div, "Video stream not available", :id => id)
   end
   def video_selector(record_id,video_selector_id ="video_selector_id")
     javascript_tag(<<-CODE
-$(document).ready(function(){
+jQuery(document).ready(function($){
 var camerasEl;
 var cameraInterval=setInterval(function(){
         camerasEl = document.getElementById("#{record_id}");
@@ -38,7 +38,7 @@ CODE
   end
   def audio_selector(record_id,audio_selector_id="audio_selector_id")
     javascript_tag(<<-CODE
-$(document).ready(function(){
+jQuery(document).ready(function($){
       var audioEl;
       var audioInterval=setInterval(function() {
        audioEl = document.getElementById("#{record_id}");
