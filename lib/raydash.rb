@@ -100,7 +100,7 @@ module Raydash
   end
   # Sets a callback url with three parameters
   def self.setCallbackUrl(userid, secret, url)
-    path="/api/2/callbackurl/"  + "?userid=" + self.userid  + "&secret=" + self.secret + "&url=" + CGI::escape(url)
+    path="/api/2/callbackurl/"  + "?userid=" + self.userid  + "&secret=" + self.secret + "&callbackurl=" + CGI::escape(url)
     result = getRequest(path)
     result.value()
     return JSON.parse(result.body)
