@@ -67,7 +67,12 @@ module Raydash
     result = getRequest(path)
     return result.body
   end
-
+  # Create a content token
+  def self.createContentToken(contentUrl)
+    path = "/api/2/contenttoken"
+    result=postRequest(path,{'userid'=>self.userid,'secret'=>self.secret,'contentUrl'=>contentUrl})
+    return result.body
+  end
   # Change to a random stream with the specified customGoup
   def self.changeStreamRand(output_token,params={})
     customGroup=params[:customGroup]
@@ -104,6 +109,12 @@ module Raydash
     result = getRequest(path)
     result.value()
     return JSON.parse(result.body)
+  end
+  # Retrieve a token for playing a remote stream
+  def self.getRestreamToken(url) 
+    path="/api/2/restreamtoken";
+    result=postRequest(path,{'userid'=>self.userid,'secret'=>self.secret,'url'=>url})
+    return result.body
   end
   def self.startRecord(token)
     path="/api/2/startRecord/#{token}"
